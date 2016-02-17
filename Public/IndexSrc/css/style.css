@@ -1,0 +1,19 @@
+/* StyleSheet For Index/index */
+/* Set Background Color */
+html,body {
+    background-color: #dedede;
+}
+/* Set Title */
+.title {
+    font-family: "Microsoft MHei";
+    font-size: 56px;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+}
+/* Login button */
+.btn-login {
+    width: 200px;
+    margin: 10px auto;
+    display: block;
+}
