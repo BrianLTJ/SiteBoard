@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="modal fade" id="modalClean">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Confirm</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to clean project <code>{$data.name}</code> 's local folder <code>{$data.folder}</code> and reclone from <code>{$data.giturl}</code> ?</p>
+                <p>This operation will delete all your local file and clone the latest version from repo.</p>
+                <p>Continue?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="btnConfirmCleanClone">Yes,Clean and reclone</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="container-fluid">
+    <div class="page-header">
+        <h2>{$data.name} <small>Created on:{$data.createtime}</small></h2>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Project Info</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2"><strong>Name</strong></div>
+                        <div class="col-sm-10">{$data.name}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><strong>Description</strong></div>
+                        <div class="col-sm-10">{$data.description}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><strong>Type</strong></div>
+                        <div class="col-sm-10">{$data.type}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><strong>URL</strong></div>
+                        <div class="col-sm-10">{$data.giturl}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><strong>Local Address</strong></div>
+                        <div class="col-sm-10">{$data.folder}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><strong></strong></div>
+                        <div class="col-sm-10"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><strong></strong></div>
+                        <div class="col-sm-10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Branches</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2"><strong>Local Branches</strong></div>
+                        <div class="col-sm-10">
+                            <div id="local-branches-area">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"><button type="button" class="btn btn-default" id="btnRefreshBranch">Refresh</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sync</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2"><strong>Target Branch</strong></div>
+                        <div class="col-sm-7">
+                                <select name="" id="Sync-target" class="form-control">
+                                    <foreach name="branches" item="b">
+                                        <option value="{$b}">{$b}</option>
+                                    </foreach>
+                                </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary" id="btnRunSync">RunSync</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <pre id="sync-result"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Checkout branch</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2"><strong>Checkout Target</strong></div>
+                        <div class="col-sm-7">
+                            <select name="" id="Switch-to" class="form-control">
+                                <foreach name="branches" item="b">
+                                    <option value="{$b}">{$b}</option>
+                                </foreach>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" class="btn btn-primary" id="btnCheckout">Checkout</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <pre id="checkout-result"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Other Operations</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <button class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-target="#modalClean">Clean Folder And Reclone From Clond</button>
+                    </div>
+                    <div class="row">
+                        <pre id="cleanclone-result"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6"></div>
+    </div>
+    <!--div.row>div.col-sm-6*2-->
+
+</div>
+
+<script src="__PUBLIC__/Dashboard/js/Index.js"></script>
+</body>
+</html>

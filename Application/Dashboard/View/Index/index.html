@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>SiteBoard - Panel</title>
+</head>
+<body>
+<div class="modal fade" id="modalNewProj">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">New Project</h4>
+            </div>
+            <div class="modal-body">
+                <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="container-fluid">
+    <h3 class="col-sm-offset-1">Your&nbsp;Projects</h3>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewProj">+&nbsp;New&nbsp;Project</button>-->
+        <a href="{:U('Dashboard/Index/newproject')}" class="btn btn-primary"> + New Project</a>
+    </div>
+
+    <table class="table table-hover">
+        <foreach name="value" item="v">
+            <tr>
+                <td width="60%"><p class="list-project-name">{$v.name}</p><p class="list-project-url">{$v.giturl}</p></td>
+                <td width="40%">
+                    <!--<button type="button" class="btn btn-info btn-sm">Setting</button>-->
+                    <form action="{:U('Dashboard/Operation/index')}" method="post">
+                        <input type="hidden" name="pid" value="{$v.pid}">
+                        <button type="submit" class="btn btn-success btn-sm">Operations...</button>
+                    </form>
+
+                </td>
+            </tr>
+        </foreach>
+    </table>
+</div>
+</body>
+</html>

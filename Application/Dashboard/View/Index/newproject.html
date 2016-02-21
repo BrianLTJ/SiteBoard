@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NewProject</title>
+</head>
+<body>
+<div class="container">
+    <h3 class="col-sm-offset-1">New&nbsp;Project</h3>
+    <form action="{:U('Dashboard/Operation/addNewProject')}" method="post" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Project Name</label>
+            <div class="col-sm-9">
+                <input type="text" name="name" class="form-control" placeholder="Name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Desctiption</label>
+            <div class="col-sm-9">
+                <input type="text" name="description" class="form-control" placeholder="...">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Git Repo URL</label>
+            <div class="col-sm-9">
+                <input type="text" name="url" class="form-control" placeholder="URL">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Repo type</label>
+            <div class="col-sm-9">
+                <input type="text" name="type" class="form-control" placeholder="...">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Site Folder Name</label>
+            <div class="col-sm-9">
+                <input type="text" name="folder" class="form-control" placeholder="Folder">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-4">
+                <button class="btn btn-primary btn-lg" type="submit">Add Project</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
